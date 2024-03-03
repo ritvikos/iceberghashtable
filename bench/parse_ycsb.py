@@ -18,32 +18,35 @@ crun = []
 
 # Parse driver output
 fname = sys.argv[1]
+
+
 def ser_app(line, ser, num, idx):
     x = re.search(ser, line)
     if x:
-        l = line.split(' ')
+        l = line.split(" ")
         n = l[idx].strip()
         n = float(n) * 1000000
         num.append(n)
 
+
 with open(fname) as f:
     line = f.readline()
     while line != "":
-        if (line.split(' ')[1] == worka):
+        if line.split(" ")[1] == worka:
             line = f.readline()
-            # ser_app(line, load_ser, load, 2) 
+            # ser_app(line, load_ser, load, 2)
             line = f.readline()
-            ser_app(line, run_ser, arun, 2) 
-        elif (line.split(' ')[1] == workb):
+            ser_app(line, run_ser, arun, 2)
+        elif line.split(" ")[1] == workb:
             line = f.readline()
-            # ser_app(line, load_ser, load, 2) 
+            # ser_app(line, load_ser, load, 2)
             line = f.readline()
-            ser_app(line, run_ser, brun, 2) 
-        elif (line.split(' ')[1] == workc):
+            ser_app(line, run_ser, brun, 2)
+        elif line.split(" ")[1] == workc:
             line = f.readline()
-            ser_app(line, load_ser, load, 2) 
+            ser_app(line, load_ser, load, 2)
             line = f.readline()
-            ser_app(line, run_ser, crun, 2) 
+            ser_app(line, run_ser, crun, 2)
         line = f.readline()
 
 # print(load)
@@ -58,8 +61,18 @@ opf.write("threads\t\tload\t\ta\t\tb\t\tc\n")
 idx = 0
 for l, a, b, c in zip(load, arun, brun, crun):
     thr = int(math.pow(2, idx))
-    opf.write(str(thr) + "\t\t" + str(l) + "\t\t" + str(a) + "\t\t" + str(b) + "\t\t" + str(c) + "\n")
-    idx = idx+1
+    opf.write(
+        str(thr)
+        + "\t\t"
+        + str(l)
+        + "\t\t"
+        + str(a)
+        + "\t\t"
+        + str(b)
+        + "\t\t"
+        + str(c)
+        + "\n"
+    )
+    idx = idx + 1
 
 opf.close()
-
